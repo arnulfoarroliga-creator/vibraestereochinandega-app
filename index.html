@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090914">
+<title>Vibra Estéreo Chinandega</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090914;color:white;font-family:Arial,sans-serif;text-align:center}
+header{padding:35px 15px;background:linear-gradient(135deg,#25113c,#10152f)}
+.logo{font-size:43px;font-weight:900;background:linear-gradient(90deg,#ff42a1,#9864ff,#48aaff);color:transparent;background-clip:text}
+header p{letter-spacing:2px;font-size:13px}
+main{padding:20px;max-width:600px;margin:auto}
+.panel{background:#19192e;border:1px solid #383452;border-radius:22px;padding:25px;margin:18px 0}
+h1{font-size:27px}
+button,.link{display:block;width:100%;padding:16px;margin:12px 0;border:0;border-radius:30px;background:linear-gradient(90deg,#ff399c,#765cff);color:white;font-weight:bold;font-size:16px;text-decoration:none;cursor:pointer}
+.link{background:#292943}
+.status{color:#bcbcd0;font-size:13px}
+footer{padding:25px;color:#aaa;font-size:12px;line-height:1.8}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">VIBRA</div>
+<h2>ESTÉREO CHINANDEGA</h2>
+<p>TU MÚSICA • TU COMPAÑÍA • TU CONEXIÓN</p>
+</header>
+<main>
+<div class="panel">
+<h1>🎧 RADIO EN VIVO</h1>
+<p>¡Siente la música!</p>
+<audio id="radio" preload="none">
+<source src="https://stream.zeno.fm/if4dwpcsxuvuv" type="audio/mpeg">
+</audio>
+<button id="play">▶ ESCUCHAR EN VIVO</button>
+<p class="status" id="status">Pulsa para escuchar nuestra radio.</p>
+</div>
+<div class="panel">
+<h2>📺 VIBRA TV</h2>
+<a class="link" href="https://www.youtube.com/@vibraestereochinandega" target="_blank">▶ YOUTUBE</a>
+</div>
+<div class="panel">
+<h2>🌐 NUESTRAS REDES</h2>
+<a class="link" href="https://www.facebook.com/share/1CE386FxM2/" target="_blank">📘 FACEBOOK</a>
+<a class="link" href="https://www.tiktok.com/@vibra.estereochinandega" target="_blank">♪ TIKTOK</a>
+<a class="link" href="https://wa.me/50585878934" target="_blank">💬 WHATSAPP</a>
+</div>
+<div class="panel">
+<h2>🤝 PATROCINADORES Y EVENTOS</h2>
+<p>Muy pronto anunciaremos aquí nuestras promociones y eventos.</p>
+</div>
+<button id="share">↗ COMPARTIR VIBRA</button>
+</main>
+<footer>
+<strong>VIBRA ESTÉREO CHINANDEGA</strong><br>
+SIÉNTELO • VÍVELO • COMPÁRTELO<br>
+Una marca de producciones y eventos Andino Aguirre
+</footer>
+<script>
+const radio=document.getElementById('radio');
+const play=document.getElementById('play');
+const status=document.getElementById('status');
+play.onclick=async()=>{
+ if(radio.paused){
+  status.textContent='Conectando con la emisora...';
+  try{
+   await radio.play();
+   play.textContent='❚❚ PAUSAR RADIO';
+   status.textContent='¡Estás escuchando Vibra Estéreo!';
+  }catch(e){
+   status.textContent='No se pudo conectar. Inténtalo nuevamente.';
+  }
+ }else{
+  radio.pause();
+  play.textContent='▶ ESCUCHAR EN VIVO';
+  status.textContent='Radio pausada.';
+ }
+};
+document.getElementById('share').onclick=async()=>{
+ try{
+  if(navigator.share){
+   await navigator.share({title:'Vibra Estéreo Chinandega',url:location.href});
+  }else{
+   await navigator.clipboard.writeText(location.href);
+   alert('Enlace copiado');
+  }
+ }catch(e){}
+};
+</script>
+</body>
+  </html>
+  
