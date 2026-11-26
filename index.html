@@ -79,7 +79,24 @@ play.onclick=async()=>{
  }
 };
 document.getElementById('share').onclick=async()=>{
+ const downloadUrl='https://raw.githubusercontent.com/arnulfoarroliga-creator/vibraestereochinandega-app/main/app-debug.apk';
  try{
+  if(navigator.share){
+   await navigator.share({
+    title:'Vibra Estéreo Chinandega',
+    text:'¡Descarga nuestra aplicación oficial!',
+    url:downloadUrl
+   });
+  }else{
+   await navigator.clipboard.writeText(downloadUrl);
+   alert('Enlace de descarga copiado.');
+  }
+ }catch(e){
+  if(e.name!=='AbortError'){
+   alert('Enlace de descarga: '+downloadUrl);
+  }
+ }
+};
   if(navigator.share){
    await navigator.share({title:'Vibra Estéreo Chinandega',url:location.href});
   }else{
